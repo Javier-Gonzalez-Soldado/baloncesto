@@ -9,7 +9,7 @@ public class ModeloDatos {
     private Statement set;
     private ResultSet rs;
 
-    private static final String error = "El erro es: ";
+    private static final String ERROR = "El erro es: ";
 
     public void abrirConexion() {
 
@@ -29,7 +29,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No se ha conectado
             logger.severe("No se ha podido conectar");
-            logger.severe(error + e.getMessage());
+            logger.severe(ERROR + e.getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No lee de la tabla
             logger.warning("No lee de la tabla");
-            logger.warning(error + e.getMessage());
+            logger.warning(ERROR + e.getMessage());
         }
         return (existe);
     }
@@ -65,7 +65,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No modifica la tabla
             logger.warning("No modifica la tabla");
-            logger.warning(error + e.getMessage());
+            logger.warning(ERROR + e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No inserta en la tabla
             logger.warning("No inserta en la tabla");
-            logger.warning(error + e.getMessage());
+            logger.warning(ERROR + e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class ModeloDatos {
         } catch (Exception e) {
             // No modifica la tabla
             logger.warning("No modifica la tabla");
-            logger.warning(error + e.getMessage());
+            logger.warning(ERROR + e.getMessage());
         }
     }
 
