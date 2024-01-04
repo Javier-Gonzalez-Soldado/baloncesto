@@ -65,7 +65,7 @@ public class ModeloDatosTest {
         instance.actualizarJugador("jugadorExistente");
 
         // Verificar que se llamó al método executeUpdate con la consulta esperada
-        instance.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%jugadorExistente%'");
+        Mockito.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%jugadorExistente%'");
 
         // Cerrar la conexión simulada
         instance.cerrarConexion();
