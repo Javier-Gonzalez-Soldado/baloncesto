@@ -57,9 +57,6 @@ public class ModeloDatosTest {
         // Simular la existencia de un jugador
         when(mockResultSet.next()).thenReturn(true);
 
-        // Configurar el modeloDatos para usar la conexión simulada
-        instance.abrirConexion();
-
         // Llamar al método actualizarJugador() con un nombre de jugador existente
         instance.actualizarJugador("Llull");
 
