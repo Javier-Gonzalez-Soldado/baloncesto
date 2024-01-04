@@ -86,6 +86,7 @@ public class ModeloDatos {
         try {
             set = con.createStatement();
             set.executeUpdate("UPDATE Jugadores SET votos=0");
+            rs.close();
             set.close();
         } catch (Exception e) {
             // No modifica la tabla

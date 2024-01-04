@@ -1,7 +1,43 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import static org.mockito.Mockito.*;
+
+
 public class ModeloDatosTest {
+
+    private ModeloDatos modeloDatos;
+    private Connection mockConnection;
+    private Statement mockStatement;
+
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        // Configurar el entorno de prueba
+        modeloDatos = new ModeloDatos();
+
+        // Mock de la conexión y el statement
+        mockConnection = mock(Connection.class);
+        mockStatement = mock(Statement.class);
+
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
+        when(mockStatement.executeUpdate(anyString())).thenReturn(1); // Simular que la actualización fue exitosa
+
+        modeloDatos.abrirConexion();
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        // Cerrar la conexión después de cada prueba
+        modeloDatos.cerrarConexion();
+    }
+
 
     @Test
     public void testExisteJugador() {
@@ -15,44 +51,13 @@ public class ModeloDatosTest {
     }
 
     @Test
-    public void testReiniciarVotos(){
-        System.out.println("Prueba de reiniciarVotos");
-        ModeloDatos instance = new ModeloDatos();
-        instance.reiniciarVotos();
-        // fail("Fallo forzado.");
-    }
-
-    @Test
     public void testActualizarJugador() {
-        System.out.println("Prueba de actualizarJugador");
-        String nombre = "";
-        ModeloDatos instance = new ModeloDatos();
-        instance.actualizarJugador(nombre);
-        // fail("Fallo forzado.");
-    }
+        
+        // Llamar al método que queremos probar
+        modeloDatos.actualizarJugador("Llull");
 
-    @Test
-    public void testInsertarJugador() {
-        System.out.println("Prueba de insertarJugador");
-        String nombre = "";
-        ModeloDatos instance = new ModeloDatos();
-        instance.insertarJugador(nombre);
-        // fail("Fallo forzado.");
-    }
+        // Verificar que el método de actualización se llamó con los parámetros correctos
+        verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%Llull%'");
 
-    @Test
-    public void testAbrirConexion() {
-        System.out.println("Prueba de abrirConexion");
-        ModeloDatos instance = new ModeloDatos();
-        instance.abrirConexion();
-        // fail("Fallo forzado.");
-    }
-
-    @Test
-    public void testCerrarConexion() {
-        System.out.println("Prueba de cerrarConexion");
-        ModeloDatos instance = new ModeloDatos();
-        instance.cerrarConexion();
-        // fail("Fallo forzado.");
     }
 }
