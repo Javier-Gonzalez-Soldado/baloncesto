@@ -4,20 +4,33 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 import static org.mockito.Mockito.*;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 
 
 public class ModeloDatosTest {
 
+    @Mock
+    private Connection mockConnection;
+
+    @Mock
+    private Statement mockStatement;
+
     private ModeloDatos modeloDatos;
-    private ModeloDatos mockModeloDatos;
 
 
     @BeforeEach
     public void setUp() throws Exception {
-        // Configurar el entorno de prueba
-        mockModeloDatos = mock(ModeloDatos.class);
-        mockModeloDatos.abrirConexion();
+
+        MockitoAnnotations.initMocks(this);
+        modeloDatos = new ModeloDatos();
+        modeloDatos.abrirConexion();
+        modeloDatos.set = mockStatement;
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
     }
 
     @AfterEach
@@ -39,7 +52,18 @@ public class ModeloDatosTest {
     }
 
     @Test
-    public void testActualizarJugador() {
-        assertEquals(1, 1);
+    public void testActualizarJugador() throws Exception {
+        // Configurar el estado inicial de la base de datos de prueba
+        when(mockStatement.executeUpdate(anyString())).thenReturn(1); // Supongamos que una fila fue actualizada
+
+        // Llamar al método que estamos probando
+        modeloDatos.actualizarJugador("nombre");
+
+        // Verificar que se llamó al método executeUpdate con la consulta esperada
+        verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%nombre%'");
+
+        // Verificar que se cerró el Statement
+        verify(mockStatement).close();
+
     }
 }
