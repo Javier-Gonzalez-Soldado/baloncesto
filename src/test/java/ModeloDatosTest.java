@@ -15,6 +15,7 @@ public class ModeloDatosTest {
     private ModeloDatos modeloDatos;
     private Connection mockConnection;
     private Statement mockStatement;
+    private ResultSet mockResultSet;
 
 
     @BeforeEach
