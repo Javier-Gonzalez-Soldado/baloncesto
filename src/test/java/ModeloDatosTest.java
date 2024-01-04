@@ -41,7 +41,12 @@ public class ModeloDatosTest {
     public void testActualizarJugador() throws Exception {
         System.out.println("Prueba de actualizarJugador");
         String nombre = "Llull";
-        modeloDatos.actualizarJugador(nombre);
+
+        ModeloDatos instance = new ModeloDatos();
+        instance.actualizarJugador(nombre);
+
+
+        // modeloDatos.actualizarJugador(nombre);
         // verify(modeloDatos).actualizarJugador(nombre);
         assertEquals(1, 1);
     }
