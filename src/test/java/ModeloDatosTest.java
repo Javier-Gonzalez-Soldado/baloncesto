@@ -29,7 +29,9 @@ public class ModeloDatosTest {
         MockitoAnnotations.initMocks(this);
         modeloDatos = new ModeloDatos();
         modeloDatos.abrirConexion();
-        modeloDatos.set = mockStatement;
+        modeloDatos.setStatement(mockStatement); // Usamos el nuevo método para configurar el Statement
+
+        // Configurar el mock para que devuelva el mockStatement
         when(mockConnection.createStatement()).thenReturn(mockStatement);
     }
 
