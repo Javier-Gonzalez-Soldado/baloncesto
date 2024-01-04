@@ -11,10 +11,6 @@ public class ModeloDatos {
 
     private static final String ERROR = "El erro es: ";
 
-    public void setStatement(Statement statement) {
-        this.set = statement;
-    }
-
     public void abrirConexion() {
 
         try {
