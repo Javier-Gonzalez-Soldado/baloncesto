@@ -61,10 +61,10 @@ public class ModeloDatosTest {
         instance.abrirConexion();
 
         // Llamar al método actualizarJugador() con un nombre de jugador existente
-        instance.actualizarJugador("jugadorExistente");
+        instance.actualizarJugador("Llull");
 
         // Verificar que se llamó al método executeUpdate con la consulta esperada
-        Mockito.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%jugadorExistente%'");
+        Mockito.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%Llull%'");
 
     }
 }
