@@ -17,9 +17,10 @@ public class Acb extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession s = req.getSession(true);
 
+        // Si se ha pulsado el botón de reiniciar votos, se reinician y se redirige a la página principal
         if (req.getParameter("resetVotos") != null && req.getParameter("resetVotos").equals("true")) {
             bd.reiniciarVotos();
-            res.sendRedirect(res.encodeRedirectURL("index.html")); // Redirige de vuelta a la página principal
+            res.sendRedirect(res.encodeRedirectURL("index.html"));
             return;
         }
 
