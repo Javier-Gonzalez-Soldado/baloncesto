@@ -52,12 +52,15 @@ public class ModeloDatosTest {
 
     @Test
     public void testActualizarJugador() {
-        
+        // Configurar el estado inicial de la base de datos de prueba
+        when(mockResultSet.next()).thenReturn(true, false); // Simular que hay un jugador en la base de datos
+        when(mockResultSet.getString("Nombre")).thenReturn("NombreJugador"); // Simular el nombre del jugador
+
         // Llamar al método que queremos probar
-        modeloDatos.actualizarJugador("Llull");
+        modeloDatos.actualizarJugador("NombreJugador");
 
         // Verificar que el método de actualización se llamó con los parámetros correctos
-        verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%Llull%'");
+        verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%NombreJugador%'");
 
     }
 }
