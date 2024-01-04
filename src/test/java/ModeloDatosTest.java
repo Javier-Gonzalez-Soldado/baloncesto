@@ -1,9 +1,13 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.Mockito;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import static org.mockito.Mockito.*;
 
@@ -39,15 +43,32 @@ public class ModeloDatosTest {
 
     @Test
     public void testActualizarJugador() throws Exception {
-        System.out.println("Prueba de actualizarJugador");
-        String nombre = "Llull";
 
+        // Crear un modelo de datos y simular la conexión y el statement
         ModeloDatos instance = new ModeloDatos();
-        instance.actualizarJugador(nombre);
+        instance.abrirConexion();
+        Connection mockConnection = Mockito.mock(Connection.class);
+        Statement mockStatement = Mockito.mock(Statement.class);
+        ResultSet mockResultSet = Mockito.mock(ResultSet.class);
 
+        // Configurar el modeloDatos para usar el mockStatement
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
+        when(mockStatement.executeQuery(Mockito.anyString())).thenReturn(mockResultSet);
 
-        // modeloDatos.actualizarJugador(nombre);
-        // verify(modeloDatos).actualizarJugador(nombre);
-        assertEquals(1, 1);
+        // Simular la existencia de un jugador
+        when(mockResultSet.next()).thenReturn(true);
+
+        // Configurar el modeloDatos para usar la conexión simulada
+        instance.abrirConexion();
+
+        // Llamar al método actualizarJugador() con un nombre de jugador existente
+        instance.actualizarJugador("jugadorExistente");
+
+        // Verificar que se llamó al método executeUpdate con la consulta esperada
+        instance.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%jugadorExistente%'");
+
+        // Cerrar la conexión simulada
+        instance.cerrarConexion();
+
     }
 }
