@@ -46,7 +46,6 @@ public class ModeloDatosTest {
 
         // Crear un modelo de datos y simular la conexión y el statement
         ModeloDatos instance = new ModeloDatos();
-        instance.abrirConexion();
         Connection mockConnection = Mockito.mock(Connection.class);
         Statement mockStatement = Mockito.mock(Statement.class);
         ResultSet mockResultSet = Mockito.mock(ResultSet.class);
@@ -66,9 +65,6 @@ public class ModeloDatosTest {
 
         // Verificar que se llamó al método executeUpdate con la consulta esperada
         Mockito.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%jugadorExistente%'");
-
-        // Cerrar la conexión simulada
-        instance.cerrarConexion();
 
     }
 }
