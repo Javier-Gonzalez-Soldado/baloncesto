@@ -38,7 +38,7 @@ public class ModeloDatosTest {
     @AfterEach
     public void tearDown() throws Exception {
         // Cerrar la conexión después de cada prueba
-        mockModeloDatos.cerrarConexion();
+        modeloDatos.cerrarConexion();
     }
 
 
