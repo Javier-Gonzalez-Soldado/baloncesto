@@ -22,11 +22,11 @@ public class ModeloDatosTest {
         instance.abrirConexion();
 
         String nombre = "Llull";
-        Integer votosLlullPrev = instance.getVotosJugador(nombre);
+        int votosLlullPrev = instance.getVotosJugador(nombre);
 
         instance.actualizarJugador(nombre);
 
-        Integer votosLlullPost = instance.getVotosJugador(nombre);
+        int votosLlullPost = instance.getVotosJugador(nombre);
 
         assertEquals(votosLlullPrev + 1, votosLlullPost);
         // fail("Fallo forzado.");

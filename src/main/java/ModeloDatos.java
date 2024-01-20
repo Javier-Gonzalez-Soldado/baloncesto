@@ -95,8 +95,8 @@ public class ModeloDatos {
         }
     }
 
-    public Integer getVotosJugador(String nombre) {
-        Integer votos = 0;
+    public int getVotosJugador(String nombre) {
+        int votos = 0;
         try {
             set = con.createStatement();
             rs = set.executeQuery("SELECT votos FROM Jugadores WHERE nombre " + " LIKE '%" + nombre + "%'");
