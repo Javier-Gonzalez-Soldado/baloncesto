@@ -95,11 +95,14 @@ public class ModeloDatos {
         }
     }
 
-    public void getVotosJugador(String nombre) {
+    public Integer getVotosJugador(String nombre) {
+        Integer votos = 0;
         try {
             set = con.createStatement();
             rs = set.executeQuery("SELECT votos FROM Jugadores WHERE nombre " + " LIKE '%" + nombre + "%'");
-            rs.next();
+            while (rs.next()) {
+                votos = rs.getInt("votos");
+            }
             rs.close();
             set.close();
         } catch (Exception e) {
@@ -107,6 +110,7 @@ public class ModeloDatos {
             logger.warning("No lee de la tabla");
             logger.warning(ERROR + e.getMessage());
         }
+        return (votos);
     }
 
     public void cerrarConexion() {
