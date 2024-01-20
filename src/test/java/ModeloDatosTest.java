@@ -20,6 +20,7 @@ public class ModeloDatosTest {
     public void testActualizarJugador() {
         System.out.println("Prueba de actualizarJugador");
 
+        //setear variables de entorno para los tests
         System.setProperty("DATABASE_HOST", "jdbc:mysql://localhost");
         System.setProperty("DATABASE_PORT", "3306");
         System.setProperty("DATABASE_NAME", "baloncesto");
