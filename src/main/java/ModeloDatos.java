@@ -17,11 +17,11 @@ public class ModeloDatos {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Con variables de entorno
-            String dbHost = System.getenv("DATABASE_HOST");
-            String dbPort = System.getenv("DATABASE_PORT");
-            String dbName = System.getenv("DATABASE_NAME");
-            String dbUser = System.getenv("DATABASE_USER");
-            String dbPass = System.getenv("DATABASE_PASS");
+            String dbHost = System.getenv("DATABASE_HOST") == null ? System.getProperty("DATABASE_HOST") : System.getenv("DATABASE_HOST");
+            String dbPort = System.getenv("DATABASE_PORT") == null ? System.getProperty("DATABASE_PORT") : System.getenv("DATABASE_PORT");
+            String dbName = System.getenv("DATABASE_NAME") == null ? System.getProperty("DATABASE_NAME") : System.getenv("DATABASE_NAME");
+            String dbUser = System.getenv("DATABASE_USER") == null ? System.getProperty("DATABASE_USER") : System.getenv("DATABASE_USER");
+            String dbPass = System.getenv("DATABASE_PASS") == null ? System.getProperty("DATABASE_PASS") : System.getenv("DATABASE_PASS");
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);

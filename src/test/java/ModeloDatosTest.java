@@ -1,14 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
-import uk.org.webcompere.systemstubs.jupiter.SystemStub;
 
-@ExtendWith(SystemStubsExtension.class)
 public class ModeloDatosTest {
 
-    @SystemStub
-    private static EnvironmentVariables environmentVariables=new EnvironmentVariables();
 
     @Test
     public void testExisteJugador() {
@@ -26,11 +20,12 @@ public class ModeloDatosTest {
     public void testActualizarJugador() {
         System.out.println("Prueba de actualizarJugador");
 
-        environmentVariables.set("DATABASE_HOST", "jdbc:mysql://localhost");
-        environmentVariables.set("DATABASE_PORT", "3306");
-        environmentVariables.set("DATABASE_NAME", "baloncesto");
-        environmentVariables.set("DATABASE_USER", "usuario");
-        environmentVariables.set("DATABASE_PASS", "clave");
+        System.setProperty("DATABASE_HOST", "jdbc:mysql://localhost");
+        System.setProperty("DATABASE_PORT", "3306");
+        System.setProperty("DATABASE_NAME", "baloncesto");
+        System.setProperty("DATABASE_USER", "usuario");
+        System.setProperty("DATABASE_PASS", "clave");
+
 
         ModeloDatos instance = new ModeloDatos();
         instance.abrirConexion();
