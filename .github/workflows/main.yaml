@@ -13,11 +13,6 @@ jobs:
             - name: preparar base de datos de prueba
               run: |
                   mysql -u root < db/baloncesto.sql
-                  export DATABASE_HOST="jdbc:mysql://localhost"
-                  export DATABASE_PORT="3306"
-                  export DATABASE_NAME="baloncesto"
-                  export DATABASE_USER="usuario"
-                  export DATABASE_PASS="clave"
             - name: pruebas-unitarias
               run: mvn test
             - name: compilar la aplicación sin repetir pruebas
