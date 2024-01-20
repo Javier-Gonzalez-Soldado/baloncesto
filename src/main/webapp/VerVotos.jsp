@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,6 +8,10 @@
     </head>
     <body>
         <h1>Resultado de las votaciones:</h1>
+
+        <% List < Jugador > jugadores = (List < Jugador > )
+        session.getAttribute("jugadores"); %>
+
         <table border="1">
             <thead>
                 <tr>
@@ -15,12 +20,12 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="jugador" items="${jugadores}">
-                    <tr>
-                        <td>${jugador.nombre}</td>
-                        <td>${jugador.votos}</td>
-                    </tr>
-                </c:forEach>
+                <% for (Jugador jugador : jugadores) { %>
+                <tr>
+                    <td><%= jugador.nombre %></td>
+                    <td><%= jugador.votos %></td>
+                </tr>
+                <% } %>
             </tbody>
         </table>
         <br />
