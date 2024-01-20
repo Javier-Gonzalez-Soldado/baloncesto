@@ -7,10 +7,10 @@ public class ModeloDatosTest {
     @Test
     public void testExisteJugador() {
         System.out.println("Prueba de existeJugador");
-        String nombre = "";
+        String nombre = "Rudy";
         ModeloDatos instance = new ModeloDatos();
         instance.abrirConexion();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.existeJugador(nombre);
         assertEquals(expResult, result);
         // fail("Fallo forzado.");
