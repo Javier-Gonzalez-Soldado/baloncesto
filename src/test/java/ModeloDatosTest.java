@@ -29,6 +29,8 @@ public class ModeloDatosTest {
         int votosLlullPost = instance.getVotosJugador(nombre);
 
         assertEquals(votosLlullPrev + 1, votosLlullPost);
-        // fail("Fallo forzado.");
+
+        //resetear votos
+        instance.reiniciarVotos();
     }
 }

@@ -9,7 +9,7 @@ public class ModeloDatos {
     private Statement set;
     private ResultSet rs;
 
-    private static final String ERROR = "El erro es: ";
+    private static final String ERROR = "El error es: ";
 
     public void abrirConexion() {
 
