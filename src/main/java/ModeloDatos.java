@@ -17,11 +17,11 @@ public class ModeloDatos {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Con variables de entorno
-            String dbHost = System.getenv("DATABASE_HOST");
-            String dbPort = System.getenv("DATABASE_PORT");
-            String dbName = System.getenv("DATABASE_NAME");
-            String dbUser = System.getenv("DATABASE_USER");
-            String dbPass = System.getenv("DATABASE_PASS");
+            String dbHost = "jdbc:mysql://localhost" ; //System.getenv("DATABASE_HOST");
+            String dbPort = "3306";  //System.getenv("DATABASE_PORT");
+            String dbName = "baloncesto"; //System.getenv("DATABASE_NAME");
+            String dbUser = "usuario"; //System.getenv("DATABASE_USER");
+            String dbPass = "clave"; //System.getenv("DATABASE_PASS");
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);
