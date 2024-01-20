@@ -9,6 +9,7 @@ public class ModeloDatosTest {
         System.out.println("Prueba de existeJugador");
         String nombre = "";
         ModeloDatos instance = new ModeloDatos();
+        instance.abrirConexion();
         boolean expResult = false;
         boolean result = instance.existeJugador(nombre);
         assertEquals(expResult, result);
