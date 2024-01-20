@@ -26,7 +26,9 @@ public class ModeloDatosTest {
 
         instance.actualizarJugador(nombre);
 
-        assertEquals(votosLlullPrev + 1, instance.getVotosJugador(nombre));
+        Integer votosLlullPost = instance.getVotosJugador(nombre);
+
+        assertEquals(votosLlullPrev + 1, votosLlullPost);
         // fail("Fallo forzado.");
     }
 }
