@@ -1,13 +1,14 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.contrib.java.lang.system.EnvironmentVariables;
+import org.junit.jupiter.api.extension.ExtendWith;
+import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
+import uk.org.webcompere.systemstubs.jupiter.SystemStub;
 
-
+@ExtendWith(SystemStubsExtension.class)
 public class ModeloDatosTest {
 
-    @Rule
-    public final EnvironmentVariables environmentVariables
-      = new EnvironmentVariables();
+    @SystemStub
+    private static EnvironmentVariables environmentVariables=new EnvironmentVariables();
 
     @Test
     public void testExisteJugador() {
@@ -25,7 +26,6 @@ public class ModeloDatosTest {
     public void testActualizarJugador() {
         System.out.println("Prueba de actualizarJugador");
 
-        //setear variables de entorno
         environmentVariables.set("DATABASE_HOST", "jdbc:mysql://localhost");
         environmentVariables.set("DATABASE_PORT", "3306");
         environmentVariables.set("DATABASE_NAME", "baloncesto");
