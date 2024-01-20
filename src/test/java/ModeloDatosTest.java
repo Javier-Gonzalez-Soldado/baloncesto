@@ -1,34 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.mockito.Mockito;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import static org.mockito.Mockito.*;
 
 
 public class ModeloDatosTest {
-
-    private ModeloDatos modeloDatos;
-
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        modeloDatos = mock(ModeloDatos.class);
-        modeloDatos.abrirConexion();
-    }
-
-    @AfterEach
-    public void tearDown() throws Exception {
-        // Cerrar la conexión después de cada prueba
-        modeloDatos.cerrarConexion();
-    }
-
 
     @Test
     public void testExisteJugador() {
@@ -42,26 +16,17 @@ public class ModeloDatosTest {
     }
 
     @Test
-    public void testActualizarJugador() throws Exception {
-
-        // Crear un modelo de datos y simular la conexión y el statement
+    public void testActualizarJugador() {
+        System.out.println("Prueba de actualizarJugador");
         ModeloDatos instance = new ModeloDatos();
-        Connection mockConnection = Mockito.mock(Connection.class);
-        Statement mockStatement = Mockito.mock(Statement.class);
-        ResultSet mockResultSet = Mockito.mock(ResultSet.class);
+        instance.abrirConexion();
 
-        // Configurar el modeloDatos para usar el mockStatement
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-        when(mockStatement.executeQuery(Mockito.anyString())).thenReturn(mockResultSet);
+        String nombre = "Llull";
+        Integer votosLlullPrev = instance.getVotosJugador(nombre);
 
-        // Simular la existencia de un jugador
-        when(mockResultSet.next()).thenReturn(true);
+        instance.actualizarJugador(nombre);
 
-        // Llamar al método actualizarJugador() con un nombre de jugador existente
-        instance.actualizarJugador("Llull");
-
-        // Verificar que se llamó al método executeUpdate con la consulta esperada
-        Mockito.verify(mockStatement).executeUpdate("UPDATE Jugadores SET votos=votos+1 WHERE nombre LIKE '%Llull%'");
-
+        assertEquals(votosLlullPrev + 1, instance.getVotosJugador(nombre));
+        // fail("Fallo forzado.");
     }
 }
