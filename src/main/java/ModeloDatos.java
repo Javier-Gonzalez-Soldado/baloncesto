@@ -1,10 +1,17 @@
 import java.sql.*;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModeloDatos {
+
+    private static final Logger logger = Logger.getLogger(ModeloDatos.class.getName());
 
     private Connection con;
     private Statement set;
     private ResultSet rs;
+
+    private static final String ERROR = "El error es: ";
 
     public void abrirConexion() {
 
@@ -12,19 +19,19 @@ public class ModeloDatos {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Con variables de entorno
-            String dbHost = System.getenv().get("DATABASE_HOST");
-            String dbPort = System.getenv().get("DATABASE_PORT");
-            String dbName = System.getenv().get("DATABASE_NAME");
-            String dbUser = System.getenv().get("DATABASE_USER");
-            String dbPass = System.getenv().get("DATABASE_PASS");
+            String dbHost = System.getenv("DATABASE_HOST");
+            String dbPort = System.getenv("DATABASE_PORT");
+            String dbName = System.getenv("DATABASE_NAME");
+            String dbUser = System.getenv("DATABASE_USER");
+            String dbPass = System.getenv("DATABASE_PASS");
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);
 
         } catch (Exception e) {
             // No se ha conectado
-            System.out.println("No se ha podido conectar");
-            System.out.println("El error es: " + e.getMessage());
+            logger.severe("No se ha podido conectar");
+            logger.severe(ERROR + e.getMessage());
         }
     }
 
@@ -45,8 +52,8 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No lee de la tabla
-            System.out.println("No lee de la tabla");
-            System.out.println("El error es: " + e.getMessage());
+            logger.warning("No lee de la tabla");
+            logger.warning(ERROR + e.getMessage());
         }
         return (existe);
     }
@@ -59,8 +66,8 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No modifica la tabla
-            System.out.println("No modifica la tabla");
-            System.out.println("El error es: " + e.getMessage());
+            logger.warning("No modifica la tabla");
+            logger.warning(ERROR + e.getMessage());
         }
     }
 
@@ -72,16 +79,36 @@ public class ModeloDatos {
             set.close();
         } catch (Exception e) {
             // No inserta en la tabla
-            System.out.println("No inserta en la tabla");
-            System.out.println("El error es: " + e.getMessage());
+            logger.warning("No inserta en la tabla");
+            logger.warning(ERROR + e.getMessage());
         }
+    }
+
+    public List<Jugador> obtenerVotos() {
+        List<Jugador> jugadores = new ArrayList<>();
+        try {
+            set = con.createStatement();
+            rs = set.executeQuery("SELECT * FROM Jugadores");
+            while (rs.next()) {
+                Jugador jugador = new Jugador();
+                jugador.setNombre(rs.getString("Nombre"));
+                jugador.setVotos(rs.getInt("votos"));
+                jugadores.add(jugador);
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            System.out.println("Error al obtener jugadores: " + e.getMessage());
+        }
+        return jugadores;
+
     }
 
     public void cerrarConexion() {
         try {
             con.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 

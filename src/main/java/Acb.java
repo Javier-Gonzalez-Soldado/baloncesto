@@ -18,8 +18,9 @@ public class Acb extends HttpServlet {
         //Si se ha pulsado el botón de ver votos
         if (req.getParameter("verVotos") != null) {
             // Llamada a la página jsp que muestra una tabla con los votos
-            res.sendRedirect(res.encodeRedirectURL("VerVotos.jsp"));
-            return;
+            List<Jugador> jugadores = bd.obtenerVotos();
+            req.setAttribute("jugadores", jugadores);
+            req.getRequestDispatcher("VerVotos.jsp").forward(req, res);
         }
 
 
