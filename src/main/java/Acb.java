@@ -2,7 +2,6 @@
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.util.List;
 
 public class Acb extends HttpServlet {
 
@@ -20,8 +19,8 @@ public class Acb extends HttpServlet {
         if (req.getParameter("verVotos") != null) {
             // Llamada a la página jsp que muestra una tabla con los votos
             List<Jugador> jugadores = bd.obtenerVotos();
-            s.setAttribute("jugadores", jugadores);
-            res.sendRedirect(res.encodeRedirectURL("VerVotos.jsp"));
+            req.setAttribute("jugadores", jugadores);
+            req.getRequestDispatcher("VerVotos.jsp").forward(req, res);
         }
 
 
