@@ -79,12 +79,15 @@ public class PruebasPhantomjsIT {
         driver.findElement(By.name("btnVotar")).click();
 
         //Volvemos a la página principal
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:8080/Baloncesto/");
 
         //Pulsamos el boton de ver votos
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("verVotos")).click();
 
         // Encuentra la celda correspondiente al jugador "Pepe" en la columna de votos
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         WebElement celdaPepe = driver.findElement(By.xpath("//table[@id='tablaVotos']//td[text()='Llull']/following-sibling::td"));
 
         //Comparamo el valor de la celda con el valor esperado
