@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>Resultado de las votaciones:</h1>
-        <table border="1" name="tablaVotos">
+        <table border="1" id="tablaVotos">
             <thead>
                 <tr>
                     <th>Nombre</th>
