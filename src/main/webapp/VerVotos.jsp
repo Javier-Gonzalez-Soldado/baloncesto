@@ -1,3 +1,4 @@
+<%@ page import="java.util.List, java.Jugador" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
