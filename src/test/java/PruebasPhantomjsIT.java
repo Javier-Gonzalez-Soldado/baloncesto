@@ -46,7 +46,7 @@ public class PruebasPhantomjsIT {
 
         WebElement tabla = driver.findElement(By.id("tablaVotos"));
         List<WebElement> filas = tabla.findElements(By.tagName("tr"));
-        System.out.println("Numero de filas: " + filas.size());
+        System.out.println("Objeto Filas: " + filas);
         for (WebElement fila : filas) {
             WebElement celdaDelVoto = fila.findElements(By.tagName("td")).get(1);
             assertEquals("0", celdaDelVoto.getText(),
