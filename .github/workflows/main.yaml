@@ -8,8 +8,6 @@ jobs:
         steps:
             - name: descargar repostorio
               uses: actions/checkout@v3
-            - name: comando ls
-              run: ls -la
             - name: preparar base de datos de prueba
               run: |
                   mysql -u root < db/baloncesto.sql
