@@ -1,4 +1,4 @@
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List,main.java.Jugador" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,8 +17,8 @@
             </thead>
             <tbody>
                 <%
-                List<Object> jugadores = (List<Object>) request.getAttribute("jugadores");
-                for(Object jugador : jugadores) {
+                List<Jugador> jugadores = (List<Jugador>) request.getAttribute("jugadores");
+                for(Jugador jugador : jugadores) {
                 %>
                     <tr>
                         <td><%=jugador.nombre%></td>

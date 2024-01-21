@@ -1,3 +1,5 @@
+package main.java;
+
 public class Jugador {
     private String nombre;
     private int votos;
