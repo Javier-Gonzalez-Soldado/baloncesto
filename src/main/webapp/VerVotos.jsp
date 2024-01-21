@@ -25,10 +25,6 @@
                         <td><%=jugador.getVotos()%></td>
                     </tr>
                 <%}%>
-                <tr>
-                    <td>Prueba</td>
-                    <td>5</td>
-                </tr>
             </tbody>
         </table>
         <br />
