@@ -21,7 +21,7 @@ public class Acb extends HttpServlet {
 
 
         // Si se ha pulsado el botón de reiniciar votos, se reinician y se redirige a la página principal
-        if (req.getParameter("resetVotos") != null && req.getParameter("resetVotos").equals("true")) {
+        if (req.getParameter("votosACero") != null) {
             bd.reiniciarVotos();
             res.sendRedirect(res.encodeRedirectURL("index.html"));
             return;

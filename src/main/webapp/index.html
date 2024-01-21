@@ -37,11 +37,11 @@ Author : Roberto Barchino (aplicacion original)
             <p>
                 <input type="submit" name="B1" value="Votar" />
                 <input type="reset" name="B2" value="Reset" />
-
-                <button type="button" onclick="resetVotos()">
-                    Poner votos a cero
-                </button>
             </p>
+        </form>
+
+        <form action="Acb" method="POST">
+            <button type="button" name="votosACero">Poner votos a cero</button>
         </form>
 
         <form action="Acb" method="POST">
@@ -49,20 +49,5 @@ Author : Roberto Barchino (aplicacion original)
                 Ver Votos
             </button>
         </form>
-
-        <script>
-            function resetVotos() {
-                // Enviar una solicitud al servidor para reiniciar los votos
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "Acb?resetVotos=true", true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        // Manejar la respuesta si es necesario
-                        alert("Votos reiniciados correctamente.");
-                    }
-                };
-                xhr.send();
-            }
-        </script>
     </body>
 </html>
