@@ -61,7 +61,7 @@ public class PruebasPhantomjsIT {
         // Verifica que todas las celdas tengan el valor "0"
         boolean todasCeldasSonCero = votosCells.stream().allMatch(cell -> cell.getText().equals("0"));
 
-        Assertions.assertEquals(true,todasCeldasSonCero, "El numero de votos no es correcto");
+        assertEquals(true,todasCeldasSonCero, "El numero de votos no es correcto");
 
 
         driver.close();
