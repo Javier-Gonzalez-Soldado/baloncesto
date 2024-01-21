@@ -44,12 +44,12 @@ public class PruebasPhantomjsIT {
 
         WebElement tabla = driver.findElement(By.id("tablaVotos"));
         List<WebElement> filas = tabla.findElements(By.tagName("tr"));
-        forEach(WebElement fila : filas) {
+        for (WebElement fila : filas) {
             WebElement celdaDelVoto = fila.findElements(By.tagName("td")).get(1);
             assertEquals("0", celdaDelVoto.getText(),
                     "El numero de votos no es correcto");
         }
-        
+
         driver.close();
         driver.quit();
     }
