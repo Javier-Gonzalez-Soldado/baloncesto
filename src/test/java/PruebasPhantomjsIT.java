@@ -92,5 +92,6 @@ public class PruebasPhantomjsIT {
 
         driver.close();
         driver.quit();
+    }
 
 }
