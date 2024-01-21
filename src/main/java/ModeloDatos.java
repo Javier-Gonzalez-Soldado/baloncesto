@@ -1,5 +1,9 @@
 import java.sql.*;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import main.java.Jugador;
+
 
 public class ModeloDatos {
 
@@ -22,6 +26,7 @@ public class ModeloDatos {
             String dbName = System.getenv("DATABASE_NAME") == null ? System.getProperty("DATABASE_NAME") : System.getenv("DATABASE_NAME");
             String dbUser = System.getenv("DATABASE_USER") == null ? System.getProperty("DATABASE_USER") : System.getenv("DATABASE_USER");
             String dbPass = System.getenv("DATABASE_PASS") == null ? System.getProperty("DATABASE_PASS") : System.getenv("DATABASE_PASS");
+
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);
@@ -82,6 +87,7 @@ public class ModeloDatos {
         }
     }
 
+
     public void reiniciarVotos(){
         try {
             set = con.createStatement();
@@ -111,6 +117,27 @@ public class ModeloDatos {
             logger.warning(ERROR + e.getMessage());
         }
         return (votos);
+    }
+
+    public List<Jugador> obtenerVotos() {
+        List<Jugador> jugadores = new ArrayList<>();
+        try {
+            set = con.createStatement();
+            rs = set.executeQuery("SELECT * FROM Jugadores");
+            while (rs.next()) {
+                Jugador jugador = new Jugador();
+                jugador.setNombre(rs.getString("Nombre"));
+                jugador.setVotos(rs.getInt("votos"));
+                jugadores.add(jugador);
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No lee de la tabla
+            logger.warning("No lee de la tabla");
+            logger.warning(ERROR + e.getMessage());
+        }
+        return jugadores;
     }
 
     public void cerrarConexion() {
