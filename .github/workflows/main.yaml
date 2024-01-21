@@ -4,10 +4,15 @@ on: push
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps:
             - name: descargar repostorio
               uses: actions/checkout@v3
+            - name: comando ls
+              run: ls -la
+            - name: preparar base de datos de prueba
+              run: |
+                  mysql -u root < db/baloncesto.sql
             - name: pruebas-unitarias
               run: mvn test
             - name: compilar la aplicación sin repetir pruebas

@@ -9,13 +9,23 @@ public class Acb extends HttpServlet {
 
     private ModeloDatos bd;
 
+    @Override
     public void init(ServletConfig cfg) throws ServletException {
         bd = new ModeloDatos();
         bd.abrirConexion();
     }
 
+    @Override
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession s = req.getSession(true);
+
+
+        // Si se ha pulsado el botón de reiniciar votos, se reinician y se redirige a la página principal
+        if (req.getParameter("resetVotos") != null && req.getParameter("resetVotos").equals("true")) {
+            bd.reiniciarVotos();
+            res.sendRedirect(res.encodeRedirectURL("index.html"));
+            return;
+        }
 
         //Si se ha pulsado el botón de ver votos
         if (req.getParameter("verVotos") != null) {
@@ -26,10 +36,11 @@ public class Acb extends HttpServlet {
         }
 
 
-        String nombreP = (String) req.getParameter("txtNombre");
-        String nombre = (String) req.getParameter("R1");
+        String nombreP =  req.getParameter("txtNombre");
+        String nombre = req.getParameter("R1");
+      
         if (nombre.equals("Otros")) {
-            nombre = (String) req.getParameter("txtOtros");
+            nombre =  req.getParameter("txtOtros");
         }
         if (bd.existeJugador(nombre)) {
             bd.actualizarJugador(nombre);
@@ -41,6 +52,7 @@ public class Acb extends HttpServlet {
         res.sendRedirect(res.encodeRedirectURL("TablaVotos.jsp"));
     }
 
+    @Override
     public void destroy() {
         bd.cerrarConexion();
         super.destroy();

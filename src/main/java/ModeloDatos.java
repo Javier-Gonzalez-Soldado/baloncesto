@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import main.java.Jugador;
 
+
 public class ModeloDatos {
 
     private static final Logger logger = Logger.getLogger(ModeloDatos.class.getName());
@@ -20,11 +21,12 @@ public class ModeloDatos {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Con variables de entorno
-            String dbHost = System.getenv("DATABASE_HOST");
-            String dbPort = System.getenv("DATABASE_PORT");
-            String dbName = System.getenv("DATABASE_NAME");
-            String dbUser = System.getenv("DATABASE_USER");
-            String dbPass = System.getenv("DATABASE_PASS");
+            String dbHost = System.getenv("DATABASE_HOST") == null ? System.getProperty("DATABASE_HOST") : System.getenv("DATABASE_HOST");
+            String dbPort = System.getenv("DATABASE_PORT") == null ? System.getProperty("DATABASE_PORT") : System.getenv("DATABASE_PORT");
+            String dbName = System.getenv("DATABASE_NAME") == null ? System.getProperty("DATABASE_NAME") : System.getenv("DATABASE_NAME");
+            String dbUser = System.getenv("DATABASE_USER") == null ? System.getProperty("DATABASE_USER") : System.getenv("DATABASE_USER");
+            String dbPass = System.getenv("DATABASE_PASS") == null ? System.getProperty("DATABASE_PASS") : System.getenv("DATABASE_PASS");
+
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);
@@ -85,6 +87,38 @@ public class ModeloDatos {
         }
     }
 
+
+    public void reiniciarVotos(){
+        try {
+            set = con.createStatement();
+            set.executeUpdate("UPDATE Jugadores SET votos=0");
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No modifica la tabla
+            logger.warning("No modifica la tabla");
+            logger.warning(ERROR + e.getMessage());
+        }
+    }
+
+    public int getVotosJugador(String nombre) {
+        int votos = 0;
+        try {
+            set = con.createStatement();
+            rs = set.executeQuery("SELECT votos FROM Jugadores WHERE nombre " + " LIKE '%" + nombre + "%'");
+            while (rs.next()) {
+                votos = rs.getInt("votos");
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No lee de la tabla
+            logger.warning("No lee de la tabla");
+            logger.warning(ERROR + e.getMessage());
+        }
+        return (votos);
+    }
+
     public List<Jugador> obtenerVotos() {
         List<Jugador> jugadores = new ArrayList<>();
         try {
@@ -99,10 +133,11 @@ public class ModeloDatos {
             rs.close();
             set.close();
         } catch (Exception e) {
-            System.out.println("Error al obtener jugadores: " + e.getMessage());
+            // No lee de la tabla
+            logger.warning("No lee de la tabla");
+            logger.warning(ERROR + e.getMessage());
         }
         return jugadores;
-
     }
 
     public void cerrarConexion() {
