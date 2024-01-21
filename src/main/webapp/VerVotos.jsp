@@ -15,12 +15,15 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="jugador" items="${jugadores}">
+                <%
+                List<Jugador> jugadores = (List<Jugador>) request.getAttribute("jugadores");
+                for(Jugador jugador : jugadores) {
+                %>
                     <tr>
-                        <td>${jugador.nombre}</td>
-                        <td>${jugador.votos}</td>
+                        <td><%=jugador.nombre%></td>
+                        <td><%=jugador.votos%></td>
                     </tr>
-                </c:forEach>
+                <%}%>
             </tbody>
         </table>
         <br />
