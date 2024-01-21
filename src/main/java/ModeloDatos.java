@@ -9,7 +9,7 @@ public class ModeloDatos {
     private Statement set;
     private ResultSet rs;
 
-    private static final String ERROR = "El erro es: ";
+    private static final String ERROR = "El error es: ";
 
     public void abrirConexion() {
 
@@ -17,11 +17,11 @@ public class ModeloDatos {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Con variables de entorno
-            String dbHost = System.getenv().get("DATABASE_HOST");
-            String dbPort = System.getenv().get("DATABASE_PORT");
-            String dbName = System.getenv().get("DATABASE_NAME");
-            String dbUser = System.getenv().get("DATABASE_USER");
-            String dbPass = System.getenv().get("DATABASE_PASS");
+            String dbHost = System.getenv("DATABASE_HOST") == null ? System.getProperty("DATABASE_HOST") : System.getenv("DATABASE_HOST");
+            String dbPort = System.getenv("DATABASE_PORT") == null ? System.getProperty("DATABASE_PORT") : System.getenv("DATABASE_PORT");
+            String dbName = System.getenv("DATABASE_NAME") == null ? System.getProperty("DATABASE_NAME") : System.getenv("DATABASE_NAME");
+            String dbUser = System.getenv("DATABASE_USER") == null ? System.getProperty("DATABASE_USER") : System.getenv("DATABASE_USER");
+            String dbPass = System.getenv("DATABASE_PASS") == null ? System.getProperty("DATABASE_PASS") : System.getenv("DATABASE_PASS");
 
             String url = dbHost + ":" + dbPort + "/" + dbName;
             con = DriverManager.getConnection(url, dbUser, dbPass);
@@ -80,6 +80,37 @@ public class ModeloDatos {
             logger.warning("No inserta en la tabla");
             logger.warning(ERROR + e.getMessage());
         }
+    }
+
+    public void reiniciarVotos(){
+        try {
+            set = con.createStatement();
+            set.executeUpdate("UPDATE Jugadores SET votos=0");
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No modifica la tabla
+            logger.warning("No modifica la tabla");
+            logger.warning(ERROR + e.getMessage());
+        }
+    }
+
+    public int getVotosJugador(String nombre) {
+        int votos = 0;
+        try {
+            set = con.createStatement();
+            rs = set.executeQuery("SELECT votos FROM Jugadores WHERE nombre " + " LIKE '%" + nombre + "%'");
+            while (rs.next()) {
+                votos = rs.getInt("votos");
+            }
+            rs.close();
+            set.close();
+        } catch (Exception e) {
+            // No lee de la tabla
+            logger.warning("No lee de la tabla");
+            logger.warning(ERROR + e.getMessage());
+        }
+        return (votos);
     }
 
     public void cerrarConexion() {

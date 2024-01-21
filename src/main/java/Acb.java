@@ -16,10 +16,18 @@ public class Acb extends HttpServlet {
     @Override
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession s = req.getSession(true);
-        String nombreP = req.getParameter("txtNombre");
-        String nombre = req.getParameter("R1");
+
+        // Si se ha pulsado el botón de reiniciar votos, se reinician y se redirige a la página principal
+        if (req.getParameter("resetVotos") != null && req.getParameter("resetVotos").equals("true")) {
+            bd.reiniciarVotos();
+            res.sendRedirect(res.encodeRedirectURL("index.html"));
+            return;
+        }
+
+        String nombreP =  req.getParameter("txtNombre");
+        String nombre =  req.getParameter("R1");
         if (nombre.equals("Otros")) {
-            nombre = req.getParameter("txtOtros");
+            nombre =  req.getParameter("txtOtros");
         }
         if (bd.existeJugador(nombre)) {
             bd.actualizarJugador(nombre);
