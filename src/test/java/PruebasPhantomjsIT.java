@@ -44,18 +44,7 @@ public class PruebasPhantomjsIT {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("verVotos")).click();
 
-        // WebElement tabla = driver.findElement(By.id("tablaVotos"));
-        // List<WebElement> filas = tabla.findElements(By.tagName("tr"));
-        // System.out.println("Objeto Filas: " + filas);
-        // for (WebElement fila : filas) {
-        //     WebElement celdaDelVoto = fila.findElements(By.tagName("td")).get(1);
-        //     assertEquals("0", celdaDelVoto.getText(),
-        //             "El numero de votos no es correcto");
-        // }
-
         // Obtiene todas las celdas de la columna "Votos"
-        // Utiliza la clase "votes" si has asignado una clase a las celdas de votos
-        // Puedes ajustar el selector según la estructura real de tu HTML
         List<WebElement> votosCells = driver.findElements(By.xpath("//table[@id='tablaVotos']//td[2]"));
 
         // Verifica que todas las celdas tengan el valor "0"
