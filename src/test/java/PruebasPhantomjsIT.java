@@ -59,42 +59,42 @@ public class PruebasPhantomjsIT {
         driver.quit();
     }
 
-    // @Test
-    // public void votarOtroYComprobarVotosTest() {
-    //     DesiredCapabilities caps = new DesiredCapabilities();
-    //     caps.setJavascriptEnabled(true);
-    //     caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/bin/phantomjs");
-    //     caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-    //             new String[] { "--web-security=no", "--ignore-ssl-errors=yes" });
-    //     driver = new PhantomJSDriver(caps);
-    //     driver.navigate().to("http://localhost:8080/Baloncesto/");
+    @Test
+    public void votarOtroYComprobarVotosTest() {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setJavascriptEnabled(true);
+        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "/usr/bin/phantomjs");
+        caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
+                new String[] { "--web-security=no", "--ignore-ssl-errors=yes" });
+        driver = new PhantomJSDriver(caps);
+        driver.navigate().to("http://localhost:8080/Baloncesto/");
 
-    //     //Introducimos el nombre del jugador nuevo
-    //     driver.findElement(By.name("txtOtros")).sendKeys("Pepe");
+        //Introducimos el nombre del jugador nuevo
+        driver.findElement(By.name("txtOtros")).sendKeys("Pepe");
 
-    //     //Seleccionamos el radio button de Otros
-    //     driver.findElement(By.id("rdbtnOtros")).click();
+        //Seleccionamos el radio button de Otros
+        driver.findElement(By.id("rdbtnOtros")).click();
 
-    //     //Pulsamos el boton de votar
-    //     driver.findElement(By.name("btnVotar")).click();
+        //Pulsamos el boton de votar
+        driver.findElement(By.name("btnVotar")).click();
 
-    //     //Volvemos a la página principal
-    //     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-    //     driver.navigate().to("http://localhost:8080/Baloncesto/");
+        //Volvemos a la página principal
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.navigate().to("http://localhost:8080/Baloncesto/");
 
-    //     //Pulsamos el boton de ver votos
-    //     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-    //     driver.findElement(By.id("verVotos")).click();
+        //Pulsamos el boton de ver votos
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElement(By.id("verVotos")).click();
 
-    //     // Encuentra la celda correspondiente al jugador "Pepe" en la columna de votos
-    //     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-    //     WebElement celdaPepe = driver.findElement(By.xpath("//table[@id='tablaVotos']//td[text()='Llull']/following-sibling::td"));
+        // Encuentra la celda correspondiente al jugador "Pepe" en la columna de votos
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        WebElement celdaPepe = driver.findElement(By.xpath("//table[@id='tablaVotos']//td[text()='Pepe']/following-sibling::td"));
 
-    //     //Comparamo el valor de la celda con el valor esperado
-    //     assertEquals("1", celdaPepe.getText(), "El numero de votos no es correcto");
+        //Comparamo el valor de la celda con el valor esperado
+        assertEquals("1", celdaPepe.getText(), "El numero de votos no es correcto");
 
-    //     driver.close();
-    //     driver.quit();
-    // }
+        driver.close();
+        driver.quit();
+    }
 
 }
