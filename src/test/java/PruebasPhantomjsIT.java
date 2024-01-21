@@ -70,7 +70,7 @@ public class PruebasPhantomjsIT {
         driver.navigate().to("http://localhost:8080/Baloncesto/");
 
         //Introducimos el nombre del jugador nuevo
-        driver.findElement(By.name("txtOtros")).sendKeys("Pepe");
+        driver.findElement(By.name("txtOtros")).sendKeys("jugadorTest");
 
         //Seleccionamos el radio button de Otros
         driver.findElement(By.id("rdbtnOtros")).click();
@@ -88,10 +88,10 @@ public class PruebasPhantomjsIT {
 
         // Encuentra la celda correspondiente al jugador "Pepe" en la columna de votos
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        WebElement celdaPepe = driver.findElement(By.xpath("//table[@id='tablaVotos']//td[text()='Pepe']/following-sibling::td"));
+        WebElement celdaJugadorTest = driver.findElement(By.xpath("//table[@id='tablaVotos']//td[text()='jugadorTest']/following-sibling::td"));
 
         //Comparamo el valor de la celda con el valor esperado
-        assertEquals("1", celdaPepe.getText(), "El numero de votos no es correcto");
+        assertEquals("1", celdaJugadorTest.getText(), "El numero de votos no es correcto");
 
         driver.close();
         driver.quit();
