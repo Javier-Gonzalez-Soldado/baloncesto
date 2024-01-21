@@ -3,6 +3,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
+import main.java.Jugador;
 
 public class Acb extends HttpServlet {
 

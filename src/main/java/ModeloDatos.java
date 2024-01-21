@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
+import main.java.Jugador;
 
 public class ModeloDatos {
 
