@@ -21,8 +21,8 @@
                 for(Jugador jugador : jugadores) {
                 %>
                     <tr>
-                        <td><%=jugador.nombre%></td>
-                        <td><%=jugador.votos%></td>
+                        <td><%=jugador.getNombre()%></td>
+                        <td><%=jugador.getVotos()%></td>
                     </tr>
                 <%}%>
             </tbody>
