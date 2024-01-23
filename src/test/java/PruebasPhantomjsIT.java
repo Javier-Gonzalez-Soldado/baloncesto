@@ -53,8 +53,7 @@ public class PruebasPhantomjsIT {
         boolean todasCeldasSonCero = votosCells.stream().allMatch(cell -> cell.getText().equals("0"));
 
         assertEquals(true,todasCeldasSonCero, "El numero de votos no es correcto");
-
-
+        
         driver.close();
         driver.quit();
     }

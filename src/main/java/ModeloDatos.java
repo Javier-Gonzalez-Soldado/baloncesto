@@ -147,5 +147,4 @@ public class ModeloDatos {
             logger.severe(e.getMessage());
         }
     }
-
 }
