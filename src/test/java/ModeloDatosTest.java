@@ -35,7 +35,6 @@ public class ModeloDatosTest {
         System.setProperty("DATABASE_USER", "usuario");
         System.setProperty("DATABASE_PASS", "clave");
 
-
         ModeloDatos instance = new ModeloDatos();
         instance.abrirConexion();
 
